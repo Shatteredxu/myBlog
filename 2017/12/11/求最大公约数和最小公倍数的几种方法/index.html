@@ -96,9 +96,9 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://onexwj.cn/images/暴力枚举法.png">
 <meta property="og:image" content="http://onexwj.cn/images/辗转相除法.png">
-<meta property="og:image" content="http://onexwj.cn/images/更像减损术.png">
+<meta property="og:image" content="http://onexwj.cn/images/更相减损术.png">
 <meta property="og:image" content="http://onexwj.cn/images/更像减损术+移位运算.png">
-<meta property="og:updated_time" content="2017-12-11T13:38:50.302Z">
+<meta property="og:updated_time" content="2017-12-11T13:41:20.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="求最大公约数和最小公倍数的几种方法">
 <meta name="twitter:description" content="第一种方法：暴力枚举法12345678910111213141516171819// 给定两个数求算法的最大公约数// 一：暴力枚举法function getmaxDivisor(a,b)&amp;#123;    if(a&amp;lt;b)&amp;#123;        var tmp = b         b = a         a = tmp     &amp;#125;else&amp;#123;        fo">
@@ -365,7 +365,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-12-11T21:38:50+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-11T21:41:20+08:00">
                 2017-12-11
               </time>
             
@@ -470,7 +470,7 @@
 <p><img src="/images/辗转相除法.png" alt="辗转相除法"><br>辗转相除法的优点：该算法能够较为快速的求解最大公约数。<br>缺点：a对b取模运算性能较低．</p>
 <h3 id="第三种方法：更像减损术-出自九章算术"><a href="#第三种方法：更像减损术-出自九章算术" class="headerlink" title="第三种方法：更像减损术(出自九章算术)"></a>第三种方法：更像减损术(出自九章算术)</h3><p>该算法也是使用了递归的思想 将a与b的最大公约数转化为b和a-b的最大公约数 知道a-b=0 则最大公约数为b<br>算法步骤：<br>    第一步：任意给定两个正整数；判断它们是否都是偶数。若是，则用2约简；若不是则执行第二步。<br>    第二步：以较大的数减较小的数，接着把所得的差与较小的数比较，并以大数减小数。继续这个操作，直到所  得的减数和差相等为止。<br>    则第一步中约掉的若干个2与第二步中等数的乘积就是所求的最大公约数。<br>其中所说的“等数”，就是最大公约数。求“等数”的办法是“更相减损”法。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 一：更像减损术</span><br><span class="line">function getmaxDivisor(a,b)&#123;</span><br><span class="line">    if(a&lt;b)&#123;</span><br><span class="line">        var tmp = b </span><br><span class="line">        b = a </span><br><span class="line">        a = tmp </span><br><span class="line">    &#125;</span><br><span class="line">    if</span><br><span class="line">    if(a-b)&#123;</span><br><span class="line">      getmaxDivisor(b,a-b)</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">			console.log(&quot;最大公约数为&quot;,b)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">console.time(&quot;更像减损术&quot;)</span><br><span class="line">getmaxDivisor(35,150000)</span><br><span class="line">console.timeEnd(&apos;更像减损术&apos;)</span><br></pre></td></tr></table></figure>
-<p><img src="/images/更像减损术.png" alt="更像减损术"><br>但是该算法不稳定，当a与b相差悬殊的时候 ，该算法效率很低。</p>
+<p><img src="/images/更相减损术.png" alt="更相减损术"><br>但是该算法不稳定，当a与b相差悬殊的时候 ，该算法效率很低。</p>
 <h3 id="第四种方法-：更相减损术与移位运算结合"><a href="#第四种方法-：更相减损术与移位运算结合" class="headerlink" title="第四种方法 ：更相减损术与移位运算结合"></a>第四种方法 ：更相减损术与移位运算结合</h3><ol>
 <li>介绍一下移位运算：<br>&nbsp;&nbsp;&nbsp;&nbsp;在数字没有溢出的前提下，对于正数和负数，左移一位都相当于乘以2的1次方，左移n位就相当于乘以2的n次方；右移一位相当于除2，右移n位相当于除以2的n次方。<br>比如 数字11的二进制形式为 0000 0000 0000 1011 将他左移一位 即11&gt;&gt;1 结果为 0000 0000 0001 0110 ，结果为 2<sup>5</sup>+2<sup>3</sup>+2<sup>2</sup> = 22 ,所以左移n位相当于乘以2<sup>n</sup>  </li>
 <li>移位运算为什么快？<br>&nbsp;&nbsp;左移、右移其实是做乘以2或者除以2的过程,但这是利用二进制的基本特点实现的,<br>即小数点左移或右移数据变小或变大二进制的10倍,及十进制的2倍.这个指令在硬件上仅仅需要一步（时钟步）就可以实现.<br>而乘除法实际上是通过多次加减法来实现的,在硬件上需要多步（时钟步）才能实现,这样就需要更多的时间.<br>如果有兴趣,翻一翻<mark>微机原理</mark>中关于每一步指令的执行周期图就能够看出来哪个指令长哪个指令短.<br>所以在通常情况下，移位运算比乘除运算快</li>
